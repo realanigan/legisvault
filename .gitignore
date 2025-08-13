@@ -1,0 +1,11 @@
+legisvault/node_modules/
+
+legisvault/static/dir/style.css
+
+*.pyc
+
+legisvault/__pycache__/
+
+.env
+
+.venv/
