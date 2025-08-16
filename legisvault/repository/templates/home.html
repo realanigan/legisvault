@@ -1,0 +1,28 @@
+{% extends "sections/base.html" %}
+<!-- prettier.ignore -->
+{% load static %}
+<!-- prettier.ignore -->
+
+{% block title %}Home{% endblock title %}
+
+<!-- prettier.ignore -->
+{% block main %}
+<main>
+  <div class="container mx-auto mt-11 px-10 lg:px-0">
+    <div class="flex-row justify-items-center mb-10">
+      <img
+        src="{% static './images/logo.png' %}"
+        class="w-50 h-50"
+        alt=""
+      />
+      <h2 class="font-bold text-4xl mb-2">Sangguniang Bayan</h2>
+      <h3 class="italic text-2xl">Brooke's Point, Palawan</h3>
+    </div>
+    <div class="text-justify">
+      <p class="text-pretty indent-10 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae orci a nibh consequat pretium ut ut lectus. Ut mauris libero, sagittis non consequat id, malesuada sed nisl. Vestibulum efficitur, libero non egestas gravida, velit urna malesuada est, eget consectetur nisi arcu sed dolor. Nullam facilisis elit sit amet lectus dignissim dictum. Proin molestie, arcu eget iaculis egestas, diam purus tempor tellus, non laoreet enim neque quis dolor. Morbi nec maximus eros. Vivamus pretium iaculis fermentum. Aenean non interdum nunc. Nunc et commodo eros. Fusce elementum magna sit amet lectus blandit porttitor. Mauris faucibus, est ac rutrum sagittis, diam turpis consequat velit, nec semper mi est et arcu. Integer venenatis placerat neque, ac aliquam turpis maximus ut. Etiam ultrices rhoncus justo, at placerat velit dignissim eu.</p>
+      <p class="text-pretty indent-10 mb-3">Sed et vehicula erat. Aenean luctus lorem non mi pharetra, sed posuere urna aliquam. Vivamus lacinia enim a est fringilla, sit amet efficitur felis ornare. Nulla id metus augue. Ut iaculis dui sit amet ligula ornare egestas. Nunc id elit sem. Vestibulum id euismod nunc. In eleifend augue in nulla sollicitudin lacinia. Integer aliquet congue enim, eu pellentesque dui gravida sit amet. Duis sit amet dui ligula. Donec sit amet aliquam ligula. Etiam justo.</p>
+      <p class="text-pretty indent-10 mb-3">Sed et vehicula erat. Aenean luctus lorem non mi pharetra, sed posuere urna aliquam. Vivamus lacinia enim a est fringilla, sit amet efficitur felis ornare. Nulla id metus augue. Ut iaculis dui sit amet ligula ornare egestas. Nunc id elit sem. Vestibulum id euismod nunc. In eleifend augue in nulla sollicitudin lacinia. Integer aliquet congue enim, eu pellentesque dui gravida sit amet. Duis sit amet dui ligula. Donec sit amet aliquam ligula. Etiam justo.</p>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+
+<header>
+  <div class="container mx-auto px-10 lg:px-0">
+    <div class="flex-row lg:flex lg:justify-between items-center pt-8 pb-2 border-b-2 border-[#dedede]">
+      <div>
+        <a
+          href="./home.html"
+          class="flex-row justify-center justify-items-center lg:flex items-center gap-3"
+        >
+          <img
+            src="{% static './images/logo.png' %}"
+            class="w-15 h-15 mx-auto"
+            alt=""
+          />
+          <h2 class="font-bold text-center">Sangguniang Bayan</h2>
+        </a>
+      </div>
+      <nav>
+        <ul class="flex gap-5 font-semibold justify-between mt-3">
+          <li {% if request.resolver_match.url_name == 'index' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'index' %}">Home</a></li>
+          <li {% if request.resolver_match.url_name == 'publications' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'publications' %}">Publications</a></li>
+          <li {% if request.resolver_match.url_name == 'aboutus' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'aboutus' %}">About Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
