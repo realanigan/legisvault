@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'repository'
+    'repository',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Directory for where the user uploaded files
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+# Customizing User Model
+# https://docs.djangoproject.com/en/5.2/topics/auth/customizing/
+
+AUTH_USER_MODEL = "account.MyUser"
