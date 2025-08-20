@@ -22,7 +22,7 @@ class Legislator(models.Model):
     return f"{self.first_name} {self.last_name}"
 
 #This Model represent the terms and position of the legislators. Good for historical Data
-class LegislatorTerms(models.Model):
+class LegislatorTerm(models.Model):
   POSITION_CHOICES = [
     ("councilor", "Municipal Councilor"),
     ("vice_mayor", "Municipal Vice Mayor"),
@@ -53,7 +53,7 @@ class LegalMeasure(models.Model):
   pdf_file = models.FileField(upload_to=legal_measure_path)
   date_added = models.DateTimeField(auto_now_add=True)
 
-  legislator = models.ManyToManyField(LegislatorTerms, through="Participation" ,related_name="measures")
+  legislator = models.ManyToManyField(LegislatorTerm, through="Participation" ,related_name="measures")
   related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'))
 
 
@@ -73,7 +73,7 @@ class Committee(models.Model):
   description = models.TextField()
   slug = models.TextField()
 
-  legislator = models.ManyToManyField(LegislatorTerms, through="CommitteeMembership", related_name="legislators")
+  legislator = models.ManyToManyField(LegislatorTerm, through="CommitteeMembership", related_name="legislators")
   legal_measure = models.ManyToManyField(LegalMeasure, through="CommitteeMeasure", related_name="measures")
 
   def save(self, *args, **kwargs):
@@ -92,7 +92,7 @@ class CommitteeMembership(models.Model):
     ("vice_chairman", "Vice Chairman"),
     ("member", "member")
   ]
-  legislator = models.ForeignKey(LegislatorTerms, on_delete=models.CASCADE, related_name="committee_membership")
+  legislator = models.ForeignKey(LegislatorTerm, on_delete=models.CASCADE, related_name="committee_membership")
   committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committee")
   role = models.CharField(max_length=100, choices=ROLE_CHOICES)
   start_date = models.DateField()
@@ -106,7 +106,7 @@ class Participation(models.Model):
     ("sponsor", "Sponsor")
   ]
   legal_measure = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="participations")
-  legislator_term = models.ForeignKey(LegislatorTerms, on_delete=models.CASCADE, related_name="participations")
+  legislator_term = models.ForeignKey(LegislatorTerm, on_delete=models.CASCADE, related_name="participations")
   role = models.CharField(max_length=50, choices=ROLE_CHOICES)
 
 # This model is for resolving legal documents relation to itself like 

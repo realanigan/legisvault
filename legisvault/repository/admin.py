@@ -1,7 +1,28 @@
 from django.contrib import admin
-from .models import Legislator
+from .models import Legislator, LegalMeasure, LegislatorTerm
 # Register your models here.
 
-@admin.register(Legislator)
+
+
+class LegislatorTermAdmin(admin.TabularInline):
+  model = LegislatorTerm
+  extra = 1
+  max_num = 1
+
+
 class LegislatorAdmin(admin.ModelAdmin):
-  list_display = ('first_name', 'last_name', 'portrait')
+  inlines = [LegislatorTermAdmin]
+  
+
+@admin.register(LegalMeasure)
+class LegalMeasureAdmin(admin.ModelAdmin):
+  pass
+
+
+
+admin.site.register(Legislator, LegislatorAdmin)
+
+
+
+
+
