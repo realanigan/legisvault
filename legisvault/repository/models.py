@@ -1,22 +1,28 @@
 import os
 import uuid
 from django.db import models
+from datetime import date
 from django.utils.text import slugify
 
-
+## Defining the path where the pdf file of legal measure will be stored
 def legal_measure_path(instance, filename):
-  return os.path.join('legislative-measures',instance.type, filename)
+  new_file_name = f"{instance.type} No. {instance.number}.pdf"
+  return os.path.join('legislative-measures',instance.type + "s", new_file_name)
 
+## Defining the path where the profile picture will be stored
+def profile_picture_path(instance, filename):
+  folder = str(instance.first_name) + str(instance.last_name)
+  return os.path.join('legislator', folder, filename)
 
 # Represents the elected Officials and Ex-Oficio of Sangguniang Bayan
 class Legislator(models.Model):
   first_name = models.CharField(max_length=100)
   last_name = models.CharField(max_length=100)
   portrait = models.ImageField(
-    upload_to="legislator/portrait", 
+    upload_to=profile_picture_path, 
     null=True, 
     blank=True, 
-    default="static/images/johndoe.png")
+  )
 
   def __str__(self):
     return f"{self.first_name} {self.last_name}"
@@ -24,48 +30,66 @@ class Legislator(models.Model):
 #This Model represent the terms and position of the legislators. Good for historical Data
 class LegislatorTerm(models.Model):
   POSITION_CHOICES = [
-    ("councilor", "Municipal Councilor"),
-    ("vice_mayor", "Municipal Vice Mayor"),
-    ("abc_president", "ABC President"),
-    ("ip_representative", "IP Representative"),
-    ("sk_federation_president", "SK Municipal Federation President")
+    ("Councilor", "Municipal Councilor"),
+    ("Municipal Vice Mayor", "Municipal Vice Mayor"),
+    ("ABC President", "ABC President"),
+    ("IP Representative", "IP Representative"),
+    ("SK Municipal Federation President", "SK Municipal Federation President")
   ]
 
   legislator = models.ForeignKey(Legislator, on_delete=models.CASCADE, related_name="terms")
   position = models.CharField(max_length=150, choices=POSITION_CHOICES)
   start_of_term = models.DateField()
   end_of_term = models.DateField()
-  remarks = models.TextField()
+  remarks = models.TextField(null=True, blank=True)
+
+  def __str__(self):
+    return f"{self.legislator.first_name} {self.legislator.last_name} - {self.position} ({self.start_of_term.year} - {self.end_of_term.year})"
+
+  class Meta:
+    verbose_name = "Legislator"
+    verbose_name_plural = "Legislators"
 
 #This Model represents the legal documents enacted by the sangguniang bayan
 class LegalMeasure(models.Model):
   TYPE_CHOICES = [
-    ("resolution", "SB Resolution"),
-    ("ordinance", "Ordinance"),
-    ("appropriation", "Appropriation Ordinance")
+    ("SB Resolution", "SB Resolution"),
+    ("Municipal Ordinance", "Municipal Ordinance"),
+    ("Appropriation Ordinance", "Appropriation Ordinance")
     ]
 
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   type = models.CharField(max_length=150, choices=TYPE_CHOICES)
+  year = models.IntegerField(null=True, blank=True)
+  sequence = models.IntegerField(null=True, blank=True)
+  suffix = models.CharField(max_length=5, blank=True)
   title = models.TextField()
   slug = models.TextField()
   date_approved = models.DateField()
   pdf_file = models.FileField(upload_to=legal_measure_path)
   date_added = models.DateTimeField(auto_now_add=True)
 
-  legislator = models.ManyToManyField(LegislatorTerm, through="Participation" ,related_name="measures")
-  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'))
+  legislator = models.ManyToManyField(LegislatorTerm, through="Participation", related_name="measures")
+  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'), blank=True, null=True)
 
 
   def save(self, *args, **kwargs):
     if not self.slug:
       self.slug = slugify(self.title)
 
-      super().save(*args, **kwargs)
+    super().save(*args, **kwargs)
 
+
+  @property
+  def number(self):
+    if self.year is None or self.sequence is None:
+      return ""
+    
+    return f"{self.year}-{self.sequence:02d}{self.suffix}"
 
   def __str__(self):
-    return self.title
+    return f"{self.type} No. {self.number}"
+  
 
 # This model represent the current Committee Present in the Sangguniang Bayan
 class Committee(models.Model):
@@ -88,9 +112,9 @@ class Committee(models.Model):
 # This model is an intersecting entity for Legislator and Committee
 class CommitteeMembership(models.Model):
   ROLE_CHOICES = [
-    ("chairman", "Chairman"),
-    ("vice_chairman", "Vice Chairman"),
-    ("member", "member")
+    ("Chairman", "Chairman"),
+    ("Vice Chairman", "Vice Chairman"),
+    ("Member", "member")
   ]
   legislator = models.ForeignKey(LegislatorTerm, on_delete=models.CASCADE, related_name="committee_membership")
   committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committee")
@@ -101,13 +125,23 @@ class CommitteeMembership(models.Model):
 # This model is the intersecting entity for LegislatorTerms(Legislator) and Enacted Legal Documents
 class Participation(models.Model):
   ROLE_CHOICES = [
-    ("author", "Author"),
-    ("co_author", "Co-Author"),
-    ("sponsor", "Sponsor")
+    ("Author", "Author"),
+    ("Co-Author", "Co-Author"),
+    ("Sponsor", "Sponsor")
   ]
   legal_measure = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="participations")
-  legislator_term = models.ForeignKey(LegislatorTerm, on_delete=models.CASCADE, related_name="participations")
+  legislator = models.ForeignKey(LegislatorTerm, on_delete=models.CASCADE, related_name="participations")
   role = models.CharField(max_length=50, choices=ROLE_CHOICES)
+
+  class Meta:
+    constraints = [
+    models.UniqueConstraint(
+        fields=["legislator", "legal_measure", "role"],
+        name="unique_legislator_measure_role"
+    )
+  ]
+
+    
 
 # This model is for resolving legal documents relation to itself like 
 class MeasureRelation(models.Model):
@@ -121,12 +155,16 @@ class MeasureRelation(models.Model):
   relation_type = models.CharField(max_length=20, choices=RELATION_TYPE_CHOICES)
   description = models.TextField(null=True,blank=True)
 
+
+  def __str__(self):
+    return f"{self.related_measure} {self.relation_type} {self.legal_measure}"
+
 #This model is fixing multiple committee author/sponsor for enacted legal documents 
 class CommitteeMeasure(models.Model):
   ROLE_CHOICES = [
-    ("author", "Author"),
-    ("co_author", "Co-Author"),
-    ("sponsor", "Sponsor")
+    ("Author", "Author"),
+    ("Co-Author", "Co-Author"),
+    ("Sponsor", "Sponsor")
   ]
   
   legal_measure = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="committee_measure")

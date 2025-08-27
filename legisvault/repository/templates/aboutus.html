@@ -11,222 +11,23 @@
     <h2 class="font-bold text-4xl my-10 text-center">Incumbent Elected Officials</h2>
 
     <div class="flex gap-5 lg:gap-x-20 lg:gap-y-10 justify-center flex-wrap mb-5">
+      {% for legislator in legislators %}
       <div class="first:w-full justify-items-center">
         <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
+          <a href="#" class="flex justify-center mx-5 mt-5 border-3 rounded-md">
+            {% if legislator.legislator.portrait %}
+            <img class="rounded-t-lg object-cover" src="{{ legislator.legislator.portrait.url }}" alt="" />
+            {% else %}
+            <img class="rounded-t-lg object-cover" src="{% static 'images/johndoe.png' %}" alt="" />
+            {% endif %}
           </a>
           <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Vice Mayor</p>
+            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ legislator.legislator }}</h5>
+            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">{{ legislator.position }}</p>
           </div>
         </div>
       </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">Municipal Councilor</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">ABC President</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">IP Representative</p>
-          </div>
-        </div>
-      </div>
-      <div class="first:w-full justify-items-center">
-        <div class="w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <a
-            href="#"
-            class="flex justify-center mx-5 mt-5 border-3 rounded-md"
-          >
-            <img
-              class="rounded-t-lg"
-              src="{% static './images/johndoe.png' %}"
-              alt=""
-            />
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">John Doe</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">SK Municipal Federation President</p>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </main>

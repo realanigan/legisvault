@@ -132,3 +132,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/5.2/topics/auth/customizing/
 
 AUTH_USER_MODEL = "account.MyUser"
+
+# for allowing content of iframe (pdf)
+X_FRAME_OPTIONS = 'SAMEORIGIN'

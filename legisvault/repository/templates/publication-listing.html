@@ -1,0 +1,38 @@
+{% extends "sections/base.html" %}
+<!--prettier.ignore-->
+{% load static %}
+
+<!--prettier.ignore-->
+{% block title %}Title{% endblock %}
+
+<!--prettier.ignore-->
+{% block main %}
+
+<main class="flex min-h-3/4">
+  <div class="container mx-auto mt-11 p-2 lg:px-0">
+    <div class="p-2 lg:p-10 border-[#D9D9D9] border-2 rounded-2xl bg-white shadow-xl">
+      <h2 class="font-bold text-4xl text-center mb-2 md:text-left">{{ data.heading }}s</h2>
+      <div class="border-t-2 p-3">
+        {% if not data.list %}
+        <div>
+          <h2>No Data</h2>
+        </div>
+        {% else %} {% for resolution in data.list %}
+
+        <div class="flex border-[#dedede] border-b-1 py-5">
+          <img src="{% static './images/pdf.png' %}" class="w-20 h-20 hidden md:block self-center mr-4" alt="" />
+          <div>
+            <a href="{% url 'publication-details' publication=resolution.type id=resolution.id slug=resolution.slug %}">
+              <h3 class="font-bold text-2xl text-blue-500 underline">{{resolution.type}} No. {{ resolution.number }}</h3>
+            </a>
+            <p class="text-pretty text-justify text-sm italic mb-1">{{ resolution.date_approved|date:"l, j F Y" }}</p>
+            <p class="text-pretty">{{ resolution.title }}</p>
+          </div>
+        </div>
+
+        {% endfor %} {% endif %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "sections/base.html" %}
+<!--prettier.ignore-->
+{% load static %}
+
+<!--prettier.ignore-->
+{% block title %}About Us{% endblock %}
+
+<!--prettier.ignore-->
+{% block main %}
+<main>
+  <div class="container mx-auto px-10 lg:px-0">
+    <div class="flex flex-col text-center mt-15">
+      <h2 class="font-bold text-5xl mb-8">Sangguniang Bayan Publications</h2>
+      <p class="text-justify mb-20">A <span class="font-bold">Sangguniang Bayan (SB) Publication</span> serves as the official medium through which the municipal council informs the public of its enacted resolutions, ordinances, and other legislative measures. It ensures transparency, accessibility, and accountability by making local laws and policies available to constituents. Typically, the publication contains the full texts of approved ordinances and resolutions, accompanied by explanatory notes or summaries to aid public understanding. Beyond its legal purpose of compliance with the Local Government Code’s mandate on publication for effectivity, the SB publication also functions as a valuable record of the municipality’s legislative history, enabling citizens, researchers, and government offices to track policy directions and community priorities over time.</p>
+
+      <div class="grid justify-items-center lg:grid-cols-3 gap-5 mb-10">
+        <div class="w-full lg:w-85 p-10 flex flex-col gap-2 items-center border-2 border-solid border-[#D9D9D9] shadow-sm shadow-[#FFACAC] rounded-lg">
+          <img src="{% static './images/resolutions.png' %}" alt="" class="w-40 h-50 mb-2" />
+          <h2 class="font-bold text-xl mb-2">SB Resolutions</h2>
+          <p class="text-pretty text-justify text-sm mb-3">Resolutions are formal expressions of the Sangguniang Bayan’s opinion or decision on certain matters. They may express support, request actions from other agencies, or recognize individuals and events, but they do not carry the force of law.</p>
+          <a href="{% url 'publication-listing' publication='SB Resolution' %}"><button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Learn More ></button></a>
+        </div>
+        <div class="w-full lg:w-85 p-10 flex flex-col gap-2 items-center border-2 border-solid border-[#D9D9D9] shadow-sm shadow-[#FFACAC] rounded-lg">
+          <img src="{% static './images/Orginance.png' %}" alt="" class="w-40 h-50 mb-2" />
+          <h2 class="font-bold text-xl mb-2">Municipal Ordinances</h2>
+          <p class="text-pretty text-justify text-sm mb-3">Ordinances are local laws passed by the Sangguniang Bayan that directly affect the municipality and its residents. They establish rules, policies, and regulations that must be followed within the community.</p>
+          <a href="{% url 'publication-listing' publication='Municipal Ordinance' %}"><button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Learn More ></button></a>
+        </div>
+        <div class="w-full lg:w-85 p-10 flex flex-col gap-2 items-center border-2 border-solid border-[#D9D9D9] shadow-sm shadow-[#FFACAC] rounded-lg">
+          <img src="{% static './images/earmarked.png' %}" alt="" class="w-40 h-50 mb-2" />
+          <h2 class="font-bold text-xl mb-2">Appropriation Ordinances</h2>
+          <p class="text-pretty text-justify text-sm mb-3">Appropriation ordinances are a special type of ordinance that allocate municipal funds for specific programs, projects, or services. They ensure that the local government’s budget is properly distributed to meet the needs of the people.</p>
+          <a href="{% url 'publication-listing' publication='Appropriation Ordinance' %}"><button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Learn More ></button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main %}

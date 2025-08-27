@@ -7,5 +7,6 @@ urlpatterns = [
     path("", views.indexview, name="index"),
     path("aboutus", views.aboutUsView, name="aboutus"),
     path("publications", views.publicationView, name="publications"),
-    path("publications-section", views.publicationSectionView, name="publications-section"),
+    path("publications/<str:publication>", views.publicationListing, name="publication-listing"),
+    path("publications/<str:publication>/<str:id>/<slug:slug>", views.publicationDetails, name="publication-details"),
 ]

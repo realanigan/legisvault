@@ -4,26 +4,23 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Title{% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="{% static 'dir/style.css' %}"
-    />
+    <link rel="stylesheet" href="{% static 'dir/style.css' %}" />
   </head>
-  <body class="text-lg font-normal min-h-screen">
+
+  <body class="text-lg font-normal min-h-screen bg-[#F8F9FA]">
     {% include "./header.html" %}
     <!--- Header comes here -->
 
     <!-- prettier-ignore -->
+    <div class="flex flex-col justify-between min-h-200">
     {% block main %}
     <!--- main body comes here -->
     {% endblock %}
 
     <!-- prettier-ignore -->
     {% include "./footer.html" %}
+    </div>
   </body>
 </html>
