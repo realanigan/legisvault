@@ -1,6 +1,7 @@
 from django import forms
 from .models import LegalMeasure
 import re
+from datetime import datetime
 
 class LegalMeasureForm(forms.ModelForm):
   
@@ -12,31 +13,40 @@ class LegalMeasureForm(forms.ModelForm):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
+    
     if self.instance.pk:
-        self.fields['number'].initial = self.instance.number
+      self.fields['number'].initial = self.instance.number
 
-  def clean_code(self):
+
+  def get_initial_for_field(self, field, field_name):
+        if field_name == "number" and not self.instance.pk:
+            return f"{datetime.now().year}-"
+        return super().get_initial_for_field(field, field_name)
+
+
+  def clean_number(self):
     number = self.cleaned_data['number']
 
-    match = re.match(r"^(?P<year>\d{4})-(?P<num>\d+)(?P<suffix>[A-Za-z]*)$", number)
+    match = re.match(r"^(?P<year>\d{4})-(?P<num>\d{1,4})(?P<suffix>[A-Z]*)$", number, re.IGNORECASE)
     if not match:
-      raise forms.ValidationError("Format must be YYYY-NN or YYYY-NNA")
+      raise forms.ValidationError(("Format must be YYYY-NN or YYYY-NNA (e.g. 2025-01 or 2025-15A)"), code="invalid")
 
+   
     year = int(match.group("year"))
     sequence = int(match.group("num"))   # normalize "01" → 1
     suffix = match.group("suffix").upper() if match.group("suffix") else ""
-    
+  
     self.instance.year = year
     self.instance.sequence = sequence
     self.instance.suffix = suffix
+  
 
     return number
   
 
   def save(self, commit=True):
+
     instance = super().save(commit=False)
-    instance.year = self.cleaned_data['year']
-    instance.number = self.cleaned_data['number']
     if commit:
       instance.save()
     return instance

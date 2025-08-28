@@ -47,8 +47,8 @@ class LegislatorTerm(models.Model):
     return f"{self.legislator.first_name} {self.legislator.last_name} - {self.position} ({self.start_of_term.year} - {self.end_of_term.year})"
 
   class Meta:
-    verbose_name = "Legislator"
-    verbose_name_plural = "Legislators"
+    verbose_name = "Legislator Term"
+    verbose_name_plural = "Legislator Terms"
 
 #This Model represents the legal documents enacted by the sangguniang bayan
 class LegalMeasure(models.Model):
@@ -70,7 +70,7 @@ class LegalMeasure(models.Model):
   date_added = models.DateTimeField(auto_now_add=True)
 
   legislator = models.ManyToManyField(LegislatorTerm, through="Participation", related_name="measures")
-  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'), blank=True, null=True)
+  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'), blank=True)
 
 
   def save(self, *args, **kwargs):
@@ -89,6 +89,10 @@ class LegalMeasure(models.Model):
 
   def __str__(self):
     return f"{self.type} No. {self.number}"
+  
+  class Meta:
+    verbose_name = "Legal Measure"
+
   
 
 # This model represent the current Committee Present in the Sangguniang Bayan
