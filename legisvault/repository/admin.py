@@ -4,7 +4,7 @@ from .util import generate_resolution_number
 from django.utils.text import slugify
 from .forms import LegalMeasureForm
 from datetime import datetime
-from .models import Legislator, LegalMeasure, LegislatorTerm, Participation, MeasureRelation
+from .models import Legislator, LegalMeasure, LegislatorTerm, Participation, MeasureRelation, Committee, CommitteeMembership, CommitteeMeasure
 
 
 
@@ -102,7 +102,7 @@ class ParticipationInline(admin.StackedInline):
 
 class RelatedMeasureInline(admin.StackedInline):
   model = MeasureRelation
-  fk_name = "related_measure"
+  fk_name = "target"
   extra = 1 
 
 @admin.register(LegalMeasure)
@@ -123,4 +123,20 @@ class LegalMeasureAdmin(admin.ModelAdmin):
   
 @admin.register(MeasureRelation)
 class MeasureRelationAdmin(admin.ModelAdmin):
+  pass
+
+
+
+@admin.register(Committee)
+class CommitteeAdmin(admin.ModelAdmin):
+  fields = ["name", "description"]
+
+
+@admin.register(CommitteeMembership)
+class CommitteeMembershipAdmin(admin.ModelAdmin):
+  pass
+
+
+@admin.register(CommitteeMeasure)
+class CommitteeMeasureAdmin(admin.ModelAdmin):
   pass

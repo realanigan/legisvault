@@ -3,7 +3,7 @@
 {% load static %}
 
 <!--prettier.ignore-->
-{% block title %}Title{% endblock %}
+{% block title %}{{data.document.type}} No. {{data.document.number}}{% endblock %}
 
 <!--prettier.ignore-->
 {% block main %}
@@ -24,9 +24,32 @@
           {% for legislator in data.legislators %}
           <p class="font-bold my-2">{{ legislator.role }}: <span class="font-normal">{{legislator.legislator.legislator}}</span></p>
           {% endfor %}
-          <p class="font-bold my-2">Committee: <span class="font-normal">Finance</span></p>
+
+          <!---->
+          {% if data.committees %}
+          <!---->
+          {% if data.committees.count > 1 %}
+          <p class="font-bold my-2">Committees:</p>
+          {% for committee in data.committees %}
+          <span class="ml-2 font-normal">{{committee.committee}}</span>
+          {% endfor %}
+          <!---->
+          {% else %}
+          <p class="font-bold my-2">Committee:<span class="ml-2 font-normal">{{data.committees.first.committee}}</span></p>
+          {% endif %}
+          <!---->
+          {% endif %}
           <hr class="border-[#D9D9D9] my-3" />
           <h2 class="font-bold">Related Documents:</h2>
+
+          {% for measure in data.related_measures %}
+
+          <a href="{% url 'publication-details' publication=measure.type id=measure.id slug=measure.slug %}" target="_blank" rel="noopener noreferrer">
+            <p class="font-bold my-2 text-blue-500 ml-3 underline">{{measure.type}} No. {{measure.number}}</p>
+          </a>
+
+          {% endfor %}
+
           <hr class="border-[#D9D9D9] my-5" />
           <a href="{{ data.document.pdf_file.url }}">
             <button type="button" class="mx-auto block hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Download PDF</button>

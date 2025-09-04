@@ -3,7 +3,7 @@
 {% load static %}
 
 <!--prettier.ignore-->
-{% block title %}Title{% endblock %}
+{% block title %} {% if data.heading == "SB Resolution" %} Sangguniang Bayan Resolutions {% elif data.heading == "Municipal Ordinance"%} Municipal Ordinances {% elif data.heading == "Appropriation Ordinance"%} Appropriation Ordinances {% endif%} {% endblock %}
 
 <!--prettier.ignore-->
 {% block main %}

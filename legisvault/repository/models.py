@@ -23,6 +23,7 @@ class Legislator(models.Model):
     null=True, 
     blank=True, 
   )
+  biography = models.TextField(blank=True, null=True)
 
   def __str__(self):
     return f"{self.first_name} {self.last_name}"
@@ -70,7 +71,7 @@ class LegalMeasure(models.Model):
   date_added = models.DateTimeField(auto_now_add=True)
 
   legislator = models.ManyToManyField(LegislatorTerm, through="Participation", related_name="measures")
-  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('legal_measure', 'related_measure'), blank=True)
+  related_measures = models.ManyToManyField('self', through='MeasureRelation', through_fields=('source', 'target'), blank=True)
 
 
   def save(self, *args, **kwargs):
@@ -154,14 +155,14 @@ class MeasureRelation(models.Model):
     ("related", "Related")
   ]
 
-  legal_measure = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="original_measure")
-  related_measure = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="related_measure")
+  source = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="as_source", verbose_name="Original Measure")
+  target = models.ForeignKey(LegalMeasure, on_delete=models.CASCADE, related_name="as_target", verbose_name="Related Measure")
   relation_type = models.CharField(max_length=20, choices=RELATION_TYPE_CHOICES)
   description = models.TextField(null=True,blank=True)
 
 
   def __str__(self):
-    return f"{self.related_measure} {self.relation_type} {self.legal_measure}"
+    return f"{self.target} {self.relation_type} {self.source}"
 
 #This model is fixing multiple committee author/sponsor for enacted legal documents 
 class CommitteeMeasure(models.Model):
