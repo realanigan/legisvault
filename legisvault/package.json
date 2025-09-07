@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css:watcher": "npx @tailwindcss/cli -i ./static/src/style.css -o ./static/dir/style.css --watch"
+    "css:watcher": "npx @tailwindcss/cli -i ./static/src/style.css -o ./static/dir/style.css --watch",
+    "copy:flowbite": "cp ./node_modules/flowbite/dist/flowbite.min.js ./static/javascript/flowbite/"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,8 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "tailwindcss": "^4.1.11"
+  },
+  "dependencies": {
+    "flowbite": "^3.1.2"
   }
 }

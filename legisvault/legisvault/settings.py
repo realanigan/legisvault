@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'repository',
     'account',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,16 @@ AUTH_USER_MODEL = "account.MyUser"
 
 # for allowing content of iframe (pdf)
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+# for CKEDITOR in admin
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'link', '|',
+            'bulletedList', 'numberedList', 'blockQuote', '|',
+            'insertTable', 'undo', 'redo'
+        ],
+    },
+}

@@ -1,28 +1,31 @@
 {% load static %}
 
 <header class="bg-white pb-4">
-  <div class="container mx-auto px-10 lg:px-0">
-    <div class="flex-row lg:flex lg:justify-between items-center pt-8 pb-2 border-b-2 border-[#dedede]">
-      <div>
-        <a
-          href="{% url 'index' %}"
-          class="flex-row justify-center justify-items-center lg:flex items-center gap-3"
-        >
-          <img
-            src="{% static './images/logo.png' %}"
-            class="w-15 h-15 mx-auto"
-            alt=""
-          />
-          <h2 class="font-bold text-center">Sangguniang Bayan</h2>
-        </a>
-      </div>
-      <nav>
-        <ul class="flex gap-5 font-semibold justify-between mt-3">
-          <li {% if request.resolver_match.url_name == 'index' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'index' %}">Home</a></li>
-          <li {% if request.resolver_match.url_name == 'publications' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'publications' %}">Publications</a></li>
-          <li {% if request.resolver_match.url_name == 'aboutus' %}class="text-red-500 text-xl font-bold"{% endif %}><a href="{% url 'aboutus' %}">About Us</a></li>
+  <nav class="bg-white dark:bg-gray-900 p-4 lg:container lg:mx-auto border-b-2 border-[#dedede]">
+    <div class="flex flex-wrap items-center justify-between">
+      <a href="{% url 'index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="{% static './images/logo.png' %}" class="w-15 h-15 mx-auto" alt="" />
+        <span class="self-center ml-2 font-bold text-lg lg:text-2xl whitespace-nowrap dark:text-white">Sangguniang Bayan</span>
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <li>
+            <a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %} bg-red-500 md:text-red-500 md:dark:text-red-400 font-bold text-white hover:bg-red-500 dark:hover:bg-red-500{% endif %} block py-2 px-3 text-gray-900 rounded-sm hover:bg-red-200 md:hover:bg-transparent md:border-0 md:dark:hover:text-red-400 md:bg-transparent md:hover:text-red-500 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="{% url 'publications' %}" class="{% if request.resolver_match.url_name == 'publications' %} bg-red-500 md:text-red-500 md:dark:text-red-400 font-bold text-white hover:bg-red-500 dark:hover:bg-red-500{% endif %} block py-2 px-3 text-gray-900 rounded-sm hover:bg-red-200 md:hover:bg-transparent md:border-0 md:dark:hover:text-red-400 md:bg-transparent md:hover:text-red-500 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Publications</a>
+          </li>
+          <li>
+            <a href="{% url 'aboutus' %}" class="{% if request.resolver_match.url_name == 'aboutus' %} bg-red-500 md:text-red-500 md:dark:text-red-400 font-bold text-white hover:bg-red-500 dark:hover:bg-red-500{% endif %} block py-2 px-3 text-gray-900 rounded-sm hover:bg-red-200 md:hover:bg-transparent md:border-0 md:dark:hover:text-red-400 md:bg-transparent md:hover:text-red-500 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">About Us</a>
+          </li>
         </ul>
-      </nav>
+      </div>
     </div>
-  </div>
+  </nav>
 </header>

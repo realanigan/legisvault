@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from datetime import date
 from django.utils.text import slugify
+from django_ckeditor_5.fields import CKEditor5Field
+
 
 ## Defining the path where the pdf file of legal measure will be stored
 def legal_measure_path(instance, filename):
@@ -23,7 +25,7 @@ class Legislator(models.Model):
     null=True, 
     blank=True, 
   )
-  biography = models.TextField(blank=True, null=True)
+  biography = CKEditor5Field('Content', config_name='default', null=True, blank="True")
 
   def __str__(self):
     return f"{self.first_name} {self.last_name}"

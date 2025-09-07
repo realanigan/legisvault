@@ -39,9 +39,14 @@
           {% endif %}
           <!---->
           {% endif %}
+
+          <!---->
+          {% if data.related_measures %}
           <hr class="border-[#D9D9D9] my-3" />
           <h2 class="font-bold">Related Documents:</h2>
+          {% endif %}
 
+          <!---->
           {% for measure in data.related_measures %}
 
           <a href="{% url 'publication-details' publication=measure.type id=measure.id slug=measure.slug %}" target="_blank" rel="noopener noreferrer">
