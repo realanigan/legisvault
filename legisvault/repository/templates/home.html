@@ -8,14 +8,27 @@
 <!-- prettier.ignore -->
 {% block main %}
 <main>
-  <div class="container mx-auto mt-11 px-10 lg:px-0">
-    <div class="flex-row justify-items-center mb-10">
+  <div class="container mx-auto mt-5 px-10 lg:px-0 flex flex-col md:flex-row">
+    <div class="flex-row justify-items-center mb-10 w-3/4">
       <img src="{% static './images/logo.png' %}" class="w-50 h-50" alt="" />
       <h2 id="hi" class="font-bold text-4xl mb-2 text-center">Sangguniang Bayan</h2>
       <h3 class="italic text-2xl text-center">Brooke's Point, Palawan</h3>
+      <p class="my-6 text-justify text-lg font-normal text-gray-600 lg:text-xl sm:px-16 xl:px-16 dark:text-gray-400">The <span class="font-semibold text-red-600 dark:text-blue-400">Sangguniang Bayan</span>, as mandated by the Local Government Code of 1991 (RA 7160), serves as the legislative body of the municipality. It is responsible for enacting ordinances and approving resolutions that promote good governance and community welfare. The council exercises fiscal authority by reviewing and approving the municipal budget, allocating funds for local programs, and authorizing financial transactions. It also oversees development planning by adopting land use and zoning ordinances and municipal development plans. In addition, the Sangguniang Bayan regulates businesses, public utilities, and community activities, while ensuring environmental protection and sustainable use of resources. Above all, it plays a crucial role in delivering essential services such as health, education, public works, and social welfare to enhance the quality of life for all constituents.</p>
     </div>
-    <div class="text-justify">
-      <p class="mb-6 text-lg font-normal text-gray-600 lg:text-xl sm:px-16 xl:px-32 dark:text-gray-400">The <span class="font-semibold text-red-600 dark:text-blue-400">Sangguniang Bayan</span>, as mandated by the Local Government Code of 1991 (RA 7160), serves as the legislative body of the municipality. It is responsible for enacting ordinances and approving resolutions that promote good governance and community welfare. The council exercises fiscal authority by reviewing and approving the municipal budget, allocating funds for local programs, and authorizing financial transactions. It also oversees development planning by adopting land use and zoning ordinances and municipal development plans. In addition, the Sangguniang Bayan regulates businesses, public utilities, and community activities, while ensuring environmental protection and sustainable use of resources. Above all, it plays a crucial role in delivering essential services such as health, education, public works, and social welfare to enhance the quality of life for all constituents.</p>
+    <div class="w-1/4 flex flex-col h-full">
+      <div class="bg-[#FF7274] p-3 justify-center justify-items-center">
+        <h2 class="text-white font-bold text-2xl">Recent Publications</h2>
+      </div>
+      <div class="bg-red border-2 border-[#B9B7B7] p-5 min-h-80">
+        <div>
+          <h3 class="leading-6 font-bold underline text-blue-400 text-lg">SB Resolution No. 2025-03</h3>
+          <span class="block text-base italic">Tuesday, 26 August 2025</span>
+          <p class="truncate text-lg font-normal dark:text-gray-400">A Resolution Requesting the Philippine National Police to Coordinate with the Municipal Government for the Effective Monitoring of CCTV Cameras Installed under Resolution No. 2025-010</p>
+          <hr class="my-3 border-gray-300" />
+        </div>
+
+        <a href="{% url 'publications'  %}" class="block justify-self-center"><button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">See More</button></a>
+      </div>
     </div>
   </div>
 </main>
