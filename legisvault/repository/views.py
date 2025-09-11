@@ -2,14 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import LegislatorTerm, LegalMeasure, CommitteeMeasure, Legislator
 from django.http import Http404, JsonResponse
 from datetime import date
-
-
 from django.db.models import Q, Case, When, IntegerField
 
+
 ## Custom sort (VM, councilor, etc) for database query result
+## Helper function for sorting
 order = Case(
     When(position='Municipal Vice Mayor', then=1),
-    When(position='Councilor', then=2),
+    When(position='Municipal Councilor', then=2),
     When(position='ABC President', then=3),
     When(position='IP Representative', then=4),
     When(position='SK Municipal Federation President', then=5),
@@ -18,19 +18,21 @@ order = Case(
 )
 
 
-
-
 def indexview(request):
-  return render(request,"home.html",{"request":request})
+  publications = LegalMeasure.objects.order_by("-date_added")[:3]
+
+  data = {
+    "latest_publications":publications,
+
+  }
+
+  return render(request,"home.html", data)
 
 
 def aboutUsView(request):
   current_year = date.today().year
   current_legislators = LegislatorTerm.objects.filter(start_of_term__year=current_year).order_by(order)
 
-  
-
-  
   return render(request,"aboutus.html",{"legislators": current_legislators})
 
 
@@ -47,7 +49,6 @@ def publicationListing(request, publication):
   }
 
   return render(request,"publication-listing.html",{"data":data})
-
 
 
 def publicationDetails(request, publication, id, slug):
@@ -68,8 +69,6 @@ def publicationDetails(request, publication, id, slug):
     "related_measures": related_measures,
     "committees": committees
   }
-
-  print(committees)
  
   return render(request,"publication-details.html",{"data":data})
 

@@ -110,7 +110,7 @@ class LegalMeasureAdmin(admin.ModelAdmin):
   form = LegalMeasureForm
   inlines = [ParticipationInline, RelatedMeasureInline]
   fields = ["type", "number", "title", "date_approved", "pdf_file"]
-  list_display = ["id", "type", "number", "slug", "title", "date_approved", "pdf_file"]
+  list_display = ["id", "type", "number", "slug", "title", "date_approved", "pdf_file", "date_added"]
   ordering = ("-year", "-sequence", "suffix")
   
   # def get_changeform_initial_data(self, request):

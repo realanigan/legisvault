@@ -33,7 +33,7 @@ class Legislator(models.Model):
 #This Model represent the terms and position of the legislators. Good for historical Data
 class LegislatorTerm(models.Model):
   POSITION_CHOICES = [
-    ("Councilor", "Municipal Councilor"),
+    ("Municipal Councilor", "Municipal Councilor"),
     ("Municipal Vice Mayor", "Municipal Vice Mayor"),
     ("ABC President", "ABC President"),
     ("IP Representative", "IP Representative"),
