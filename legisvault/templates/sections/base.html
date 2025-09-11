@@ -54,51 +54,6 @@
       </div>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <!-- Table caption with search -->
-      <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 p-4">
-        <div>
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Publication</h2>
-          <p class="text-sm text-gray-500 dark:text-gray-400">A list of registered users with details</p>
-        </div>
-        <label for="table-search" class="sr-only">Search</label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>
-          </div>
-          <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users" />
-        </div>
-      </div>
-
-      <!-- Table -->
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">Name</th>
-            <th scope="col" class="px-6 py-3">Email</th>
-            <th scope="col" class="px-6 py-3">Role</th>
-            <th scope="col" class="px-6 py-3">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">John Doe</th>
-            <td class="px-6 py-4">john@example.com</td>
-            <td class="px-6 py-4">Admin</td>
-            <td class="px-6 py-4">Active</td>
-          </tr>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Jane Smith</th>
-            <td class="px-6 py-4">jane@example.com</td>
-            <td class="px-6 py-4">Editor</td>
-            <td class="px-6 py-4">Pending</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
     <script src="{% static 'javascript/jQuery/jquery-3.7.js'%}"></script>
     <script src="{% static 'javascript/flowbite/flowbite.min.js'%}"></script>
     <script src="{% static 'javascript/custom.js'%}" type="module"></script>

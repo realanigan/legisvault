@@ -39,3 +39,7 @@ $(document).ready(function () {
     });
   });
 });
+
+$("#table-search").on("input", function () {
+  console.log($(this).val()); // logs the input value on every keystroke
+});
