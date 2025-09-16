@@ -143,9 +143,28 @@ CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': [
             'heading', '|',
+            'fontColor', '|',
             'bold', 'italic', 'underline', 'link', '|',
             'bulletedList', 'numberedList', 'blockQuote', '|',
             'insertTable', 'undo', 'redo'
         ],
+        'fontColor': {
+            'colors': [
+                {
+                    'color': 'hsl(0, 75%, 60%)',
+                    'label': 'Red'
+                },
+                {
+                    'color': 'hsl(120, 75%, 60%)',
+                    'label': 'Green'
+                },
+                {
+                    'color': 'hsl(240, 75%, 60%)',
+                    'label': 'Blue'
+                }
+            ]
+        }
+
+
     },
 }

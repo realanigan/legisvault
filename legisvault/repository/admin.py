@@ -4,7 +4,7 @@ from .util import generate_resolution_number
 from django.utils.text import slugify
 from .forms import LegalMeasureForm
 from datetime import datetime
-from .models import Legislator, LegalMeasure, LegislatorTerm, Participation, MeasureRelation, Committee, CommitteeMembership, CommitteeMeasure
+from .models import Legislator, LegalMeasure, LegislatorTerm, Participation, MeasureRelation, Committee, CommitteeMembership, CommitteeMeasure, SBProfile
 
 
 
@@ -140,3 +140,7 @@ class CommitteeMembershipAdmin(admin.ModelAdmin):
 @admin.register(CommitteeMeasure)
 class CommitteeMeasureAdmin(admin.ModelAdmin):
   pass
+
+@admin.register(SBProfile)
+class SBProfileAdmin(admin.ModelAdmin):
+  list_display = ["name", "address", "municipality", "province"]

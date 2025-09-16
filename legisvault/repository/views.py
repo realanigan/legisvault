@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import LegislatorTerm, LegalMeasure, CommitteeMeasure, Legislator
+from .models import LegislatorTerm, LegalMeasure, CommitteeMeasure, Legislator, SBProfile
 from django.http import Http404, JsonResponse
 from datetime import date
 from django.db.models import Q, Case, When, IntegerField
@@ -20,10 +20,12 @@ order = Case(
 
 def indexview(request):
   publications = LegalMeasure.objects.order_by("-date_added")[:3]
+  profile = SBProfile.objects.get(id=1)
+
 
   data = {
     "latest_publications":publications,
-
+    "profile":profile
   }
 
   return render(request,"home.html", data)
@@ -32,12 +34,23 @@ def indexview(request):
 def aboutUsView(request):
   current_year = date.today().year
   current_legislators = LegislatorTerm.objects.filter(start_of_term__year=current_year).order_by(order)
+  profile = SBProfile.objects.get(id=1)
 
-  return render(request,"aboutus.html",{"legislators": current_legislators})
+  data = {
+    "legislators": current_legislators,
+    "profile":profile 
+  }
+
+  return render(request,"aboutus.html", data)
 
 
 def publicationView(request):
-  return render(request,"publications.html",{"request":request})
+  profile = SBProfile.objects.get(id=1)
+
+  data = {
+      "profile":profile 
+    }
+  return render(request,"publications.html", data)
 
 
 def publicationListing(request, publication):

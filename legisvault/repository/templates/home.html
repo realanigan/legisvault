@@ -11,35 +11,34 @@
   <div class="container mx-auto mt-5 px-10 lg:px-0 flex flex-col lg:flex-row">
     <div class="flex-row justify-items-center justify-center mb-10 w-full lg:w-3/4">
       <img src="{% static './images/logo.png' %}" class="w-50 h-50" alt="" />
-      <h2 id="hi" class="font-bold text-4xl mb-2 text-center">Sangguniang Bayan</h2>
-      <h3 class="italic text-2xl text-center">Brooke's Point, Palawan</h3>
-      <p class="my-6 text-justify text-lg font-normal text-gray-600 lg:text-xl sm:px-16 xl:px-16 dark:text-gray-400">The <span class="font-semibold text-red-600 dark:text-blue-400">Sangguniang Bayan</span>, as mandated by the Local Government Code of 1991 (RA 7160), serves as the legislative body of the municipality. It is responsible for enacting ordinances and approving resolutions that promote good governance and community welfare. The council exercises fiscal authority by reviewing and approving the municipal budget, allocating funds for local programs, and authorizing financial transactions. It also oversees development planning by adopting land use and zoning ordinances and municipal development plans. In addition, the Sangguniang Bayan regulates businesses, public utilities, and community activities, while ensuring environmental protection and sustainable use of resources. Above all, it plays a crucial role in delivering essential services such as health, education, public works, and social welfare to enhance the quality of life for all constituents.</p>
+      <h2 id="hi" class="font-bold text-4xl mb-2 text-center dark:text-white">{{profile.name}}</h2>
+      <h3 class="italic text-2xl text-center dark:text-white">{% if profile %}{{profile.municipality}}, {{profile.province}}{% endif %}</h3>
+      <p class="my-6 text-justify text-lg font-normal text-gray-600 lg:text-xl sm:px-16 xl:px-16 dark:text-gray-400">The <span class="font-semibold text-red-600 dark:text-red-400">Sangguniang Bayan</span>, as mandated by the Local Government Code of 1991 (RA 7160), serves as the legislative body of the municipality. It is responsible for enacting ordinances and approving resolutions that promote good governance and community welfare. The council exercises fiscal authority by reviewing and approving the municipal budget, allocating funds for local programs, and authorizing financial transactions. It also oversees development planning by adopting land use and zoning ordinances and municipal development plans. In addition, the Sangguniang Bayan regulates businesses, public utilities, and community activities, while ensuring environmental protection and sustainable use of resources. Above all, it plays a crucial role in delivering essential services such as health, education, public works, and social welfare to enhance the quality of life for all constituents.</p>
       <a href="{% url 'aboutus' %}" class="block mx-auto hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Know More ></a>
     </div>
     <div class="w-full lg:w-1/4 flex flex-col h-full">
       <div class="bg-[#FF7274] p-3 justify-center justify-items-center">
         <h2 class="text-white font-bold md:text-2xl text-lg text-center">Recent Publications</h2>
       </div>
-      <div class="bg-red border-x-2 border-b-2 border-[#B9B7B7] min-h-50 flex flex-col justify-center">
-        {% if latest_publications %}
-          {% for publication in latest_publications %}
-            <article class="hover:bg-gray-300">
-              <a href="{% url 'publication-details' publication=publication.type id=publication.id slug=publication.slug %}" class="block px-5 py-2">
-                <h3 class="font-bold underline text-blue-400 text-lg">{{publication.type}} No. {{ publication.number }}</h3>
-                <span class="block text-base italic"> {{publication.date_approved|date:"l, j F Y" }}</span>
-                <p class="truncate text-lg font-normal dark:text-gray-400 w-full overflow-hidden whitespace-nowrap">{{ publication.title }}</p>
-                <hr class=" border-gray-300" />
-              </a>
-            </article>
-          {% endfor %}
+      <div class="bg-red border-x-2 border-b-2 border-[#B9B7B7] min-h-50 flex flex-col justify-center dark:bg-gray-700">
+        {% if latest_publications %} {% for publication in latest_publications %}
+        <article class="hover:bg-gray-300">
+          <a href="{% url 'publication-details' publication=publication.type id=publication.id slug=publication.slug %}" class="block px-5 py-2">
+            <h3 class="font-bold underline text-blue-400 text-lg">{{publication.type}} No. {{ publication.number }}</h3>
+            <span class="block text-base italic dark:text-white"> {{publication.date_approved|date:"l, j F Y" }}</span>
+            <p class="truncate text-lg font-normal dark:text-gray-400 w-full overflow-hidden whitespace-nowrap">{{ publication.title }}</p>
+            <hr class="border-gray-300" />
+          </a>
+        </article>
+        {% endfor %}
 
-          <div class="flex-1 flex items-end justify-center p-4">
-            <a href="{% url 'publications' %}">
-              <button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">See More</button>
-            </a>
-          </div>
+        <div class="flex-1 flex items-end justify-center p-4">
+          <a href="{% url 'publications' %}">
+            <button class="hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">See More</button>
+          </a>
+        </div>
         {% else %}
-          <h2 class="mx-auto font-bold">No Recent Publications</h2>
+        <h2 class="mx-auto font-bold">No Recent Publications</h2>
         {% endif %}
       </div>
     </div>

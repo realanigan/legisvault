@@ -1,11 +1,11 @@
 {% load static %}
 
-<header class="bg-white pb-4">
+<header class="bg-white pb-4 dark:bg-gray-700">
   <nav class="bg-white dark:bg-gray-900 p-4 lg:container lg:mx-auto border-b-2 border-[#dedede]">
     <div class="flex flex-wrap items-center justify-between">
       <a href="{% url 'index' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="{% static './images/logo.png' %}" class="w-15 h-15 mx-auto" alt="" />
-        <span class="self-center ml-2 font-bold text-lg lg:text-2xl whitespace-nowrap dark:text-white">Sangguniang Bayan</span>
+        <span class="self-center ml-2 font-bold text-lg lg:text-2xl whitespace-nowrap dark:text-white">{{profile.name}}</span>
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
         <span class="sr-only">Open main menu</span>

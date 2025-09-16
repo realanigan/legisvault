@@ -178,3 +178,18 @@ class CommitteeMeasure(models.Model):
   committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name="committees")
   role = models.CharField(max_length=50, choices=ROLE_CHOICES)
 
+
+class SBProfile(models.Model):
+  name = models.CharField(max_length=250, null=True, blank="True")
+  address = models.CharField(max_length=200, null=True, blank="True")
+  municipality = models.CharField(max_length=100, null=True, blank="True")
+  province = models.CharField(max_length=100, null=True, blank="True")
+  short_mandate = CKEditor5Field('Short Mandate', config_name='default', null=True, blank="True")
+  mandate = CKEditor5Field('Mandate', config_name='default', null=True, blank="True")
+  publication_header = models.CharField(max_length=200, null=True, blank="True")
+  publication_description = CKEditor5Field('Publication description', config_name='default', null=True, blank="True")
+  vision = CKEditor5Field('Vision', config_name='default', null=True, blank="True")
+  mission = CKEditor5Field('Mission', config_name='default', null=True, blank="True")
+
+  class Meta:
+    verbose_name = "Profile"

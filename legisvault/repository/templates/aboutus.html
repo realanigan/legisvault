@@ -8,28 +8,43 @@
 {% block main %}
 <main>
   <div class="container mx-auto px-10 lg:px-0">
-    <h2 class="font-bold text-4xl my-10 text-center">Incumbent Elected Officials</h2>
+    {% if profile and legislators %}
+    <section class="dark:text-gray-400 text-justify">
+      <h1 class="font-bold text-4xl my-10 dark:text-white text-center">{{profile.name }} ng {{profile.municipality}}</h1>
+      <h5 class="font-bold text-2xl my-3 dark:text-white">Mandate</h5>
+      {{profile.mandate|safe}}
 
-    <div class="flex gap-5 lg:gap-x-20 lg:gap-y-10 justify-center flex-wrap mb-5">
-      {% for legislator in legislators %}
-      <div class="first:w-full justify-items-center">
-        <!---->
-        <div data-modal-target="default-modal" data-modal-toggle="default-modal" class="councellor hover:cursor-pointer w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700" data-id="{{legislator.legislator.id}}">
-          <a class="flex justify-center mx-5 mt-5 border-3 rounded-md">
-            {% if legislator.legislator.portrait %}
-            <img class="rounded-t-lg object-cover" src="{{ legislator.legislator.portrait.url }}" alt="" />
-            {% else %}
-            <img class="rounded-t-lg object-cover" src="{% static 'images/johndoe.png' %}" alt="" />
-            {% endif %}
-          </a>
-          <div class="p-2 text-center">
-            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ legislator.legislator }}</h5>
-            <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">{{ legislator.position }}</p>
+      <h5 class="font-bold text-2xl mt-10 mb-3 dark:text-white">Vision</h5>
+      {{profile.vision|safe}}
+
+      <h5 class="font-bold text-2xl mt-10 mb-3 dark:text-white">Mission</h5>
+      {{profile.mission|safe}}
+    </section>
+    <hr class="my-10" />
+    <section>
+      <h1 class="font-bold text-4xl my-10 dark:text-white text-center">Incumbent Elected Officials</h1>
+      <div class="flex gap-5 lg:gap-x-20 lg:gap-y-10 justify-center flex-wrap mb-5">
+        {% for legislator in legislators %}
+        <div class="first:w-full justify-items-center">
+          <!---->
+          <div data-modal-target="default-modal" data-modal-toggle="default-modal" class="councellor hover:cursor-pointer w-65 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700" data-id="{{legislator.legislator.id}}">
+            <a class="flex justify-center mx-5 mt-5 border-3 rounded-md">
+              {% if legislator.legislator.portrait %}
+              <img class="rounded-t-lg object-cover" src="{{ legislator.legislator.portrait.url }}" alt="" />
+              {% else %}
+              <img class="rounded-t-lg object-cover" src="{% static 'images/johndoe.png' %}" alt="" />
+              {% endif %}
+            </a>
+            <div class="p-2 text-center">
+              <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ legislator.legislator }}</h5>
+              <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">{{ legislator.position }}</p>
+            </div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
+    </section>
+    {% endif %}
   </div>
 </main>
 
