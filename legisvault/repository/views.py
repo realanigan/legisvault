@@ -57,12 +57,18 @@ def publicationView(request):
 def publicationListing(request, publication):
   
   resolutions = LegalMeasure.objects.filter(type=str(publication)).order_by('-year','-sequence')
+  years = LegalMeasure.objects.filter(type=str(publication)).order_by("-year").values_list("year", flat=True).distinct()
+
+  
   profile = SBProfile.objects.get(id=1)
   data = {
     "heading": publication,
     "list": resolutions,
+    "years": years,
     "profile": profile,
   }
+
+  print(years)
 
   return render(request,"publication-listing.html", data)
 
