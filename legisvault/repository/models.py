@@ -59,7 +59,7 @@ class LegalMeasure(models.Model):
     ("SB Resolution", "SB Resolution"),
     ("Municipal Ordinance", "Municipal Ordinance"),
     ("Appropriation Ordinance", "Appropriation Ordinance")
-    ]
+  ]
 
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   type = models.CharField(max_length=150, choices=TYPE_CHOICES)

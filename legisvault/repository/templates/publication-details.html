@@ -3,7 +3,7 @@
 {% load static %}
 
 <!--prettier.ignore-->
-{% block title %}{{data.document.type}} No. {{data.document.number}}{% endblock %}
+{% block title %}{{document.type}} No. {{document.number}}{% endblock %}
 
 <!--prettier.ignore-->
 {% block main %}
@@ -12,42 +12,42 @@
   <div class="container mx-auto mt-11 px-10 lg:px-0">
     <div class="flex justify-between min-h-200">
       <div class="bg-black w-full lg:w-2/3 min-h-100">
-        <object data="{{ data.document.pdf_file.url }}" type="application/pdf" width="100%" height="100%"></object>
+        <object data="{{ document.pdf_file.url }}" type="application/pdf" width="100%" height="100%"></object>
       </div>
       <div class="w-1/3 pb-8 pl-10 lg:flex flex-col hidden">
         <div class="p-8 border-[#D9D9D9] border-2 rounded-2xl bg-white shadow-xl text-sm">
-          <h2 class="font-bold text-xl">{{data.document.type}} No. {{data.document.number}}</h2>
-          <p class="italic mb-3">{{data.document.date_approved|date:"l, j F Y" }}</p>
+          <h2 class="font-bold text-xl">{{document.type}} No. {{document.number}}</h2>
+          <p class="italic mb-3">{{document.date_approved|date:"l, j F Y" }}</p>
 
-          <p class="font-bold my-2 text-justify">Title: <span class="font-normal">{{data.document.title}}</span></p>
+          <p class="font-bold my-2 text-justify">Title: <span class="font-normal">{{document.title}}</span></p>
 
-          {% for legislator in data.legislators %}
+          {% for legislator in legislators %}
           <p class="font-bold my-2">{{ legislator.role }}: <span class="font-normal">{{legislator.legislator.legislator}}</span></p>
           {% endfor %}
 
           <!---->
-          {% if data.committees %}
+          {% if committees %}
           <!---->
-          {% if data.committees.count > 1 %}
+          {% if committees.count > 1 %}
           <p class="font-bold my-2">Committees:</p>
-          {% for committee in data.committees %}
+          {% for committee in committees %}
           <span class="ml-2 font-normal">{{committee.committee}}</span>
           {% endfor %}
           <!---->
           {% else %}
-          <p class="font-bold my-2">Committee:<span class="ml-2 font-normal">{{data.committees.first.committee}}</span></p>
+          <p class="font-bold my-2">Committee:<span class="ml-2 font-normal">{{committees.first.committee}}</span></p>
           {% endif %}
           <!---->
           {% endif %}
 
           <!---->
-          {% if data.related_measures %}
+          {% if related_measures %}
           <hr class="border-[#D9D9D9] my-3" />
           <h2 class="font-bold">Related Documents:</h2>
           {% endif %}
 
           <!---->
-          {% for measure in data.related_measures %}
+          {% for measure in related_measures %}
 
           <a href="{% url 'publication-details' publication=measure.type id=measure.id slug=measure.slug %}" target="_blank" rel="noopener noreferrer">
             <p class="font-bold my-2 text-blue-500 ml-3 underline">{{measure.type}} No. {{measure.number}}</p>
@@ -56,7 +56,7 @@
           {% endfor %}
 
           <hr class="border-[#D9D9D9] my-5" />
-          <a href="{{ data.document.pdf_file.url }}">
+          <a href="{{ document.pdf_file.url }}">
             <button type="button" class="mx-auto block hover:bg-[#d83f41] hover:cursor-pointer border-1 border-transparent py-2 px-5 rounded-md shadow-sm shadow-black bg-[#ED585A] text-white text-xs">Download PDF</button>
           </a>
         </div>

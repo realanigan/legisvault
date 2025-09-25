@@ -50,18 +50,21 @@ def publicationView(request):
   data = {
       "profile":profile 
     }
+  
   return render(request,"publications.html", data)
 
 
 def publicationListing(request, publication):
   
   resolutions = LegalMeasure.objects.filter(type=str(publication)).order_by('-year','-sequence')
+  profile = SBProfile.objects.get(id=1)
   data = {
     "heading": publication,
-    "list": resolutions
+    "list": resolutions,
+    "profile": profile,
   }
 
-  return render(request,"publication-listing.html",{"data":data})
+  return render(request,"publication-listing.html", data)
 
 
 def publicationDetails(request, publication, id, slug):
@@ -75,15 +78,17 @@ def publicationDetails(request, publication, id, slug):
   related_measures = LegalMeasure.objects.filter(Q(as_source__target=legal_measure) | Q(as_target__source=legal_measure)).exclude(id=legal_measure.id).order_by("-year", "-sequence")
 
   committees = CommitteeMeasure.objects.filter(legal_measure=legal_measure)
+  profile = SBProfile.objects.get(id=1)
 
   data = {
     "document": legal_measure,
     "legislators": legal_measure.participations.all(),
     "related_measures": related_measures,
-    "committees": committees
+    "committees": committees,
+    "profile": profile,
   }
  
-  return render(request,"publication-details.html",{"data":data})
+  return render(request,"publication-details.html", data)
 
 
 def getCouncellor(request, id):
@@ -92,9 +97,7 @@ def getCouncellor(request, id):
   data = {
     "name": str(legislator),
     "bio": legislator.biography,
-
   }
-
 
   return JsonResponse(data)
   

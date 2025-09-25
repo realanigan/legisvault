@@ -13,7 +13,7 @@
     <!-- Table caption with search -->
     <div class="flex items-center justify-between pb-4 mb-5 bg-white dark:bg-gray-900 p-8 border-b-2 border-[#D9D9D9] flex-col md:flex-row">
       <div>
-        <h2 class="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-white">{{ data.heading }}s</h2>
+        <h2 class="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-white">{{ heading }}s</h2>
         <p class="text-sm text-gray-500 dark:text-gray-400 text-pretty">Legal measures/documents are official records such as resolutions, ordinances, laws, or regulations that establish, modify, or enforce rules and policies.</p>
       </div>
       <label for="table-search" class="sr-only">Search</label>
@@ -41,14 +41,14 @@
           <!-- Table -->
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <tbody>
-              {% if not data.list %}
+              {% if not list %}
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4 flex gap-4 items-stretch">
                   <h2>No Data</h2>
                 </td>
               </tr>
 
-              {% else %} {% for resolution in data.list %}
+              {% else %} {% for resolution in list %}
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-red-100 hover:cursor-pointer">
                 <td class="px-6 py-4 flex gap-4 items-stretch">
                   <!-- Image wrapper: height follows the text -->
@@ -96,14 +96,14 @@
           <!-- Table -->
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <tbody>
-              {% if not data.list %}
+              {% if not list %}
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4 flex gap-4 items-stretch">
                   <h2>No Data</h2>
                 </td>
               </tr>
 
-              {% else %} {% for resolution in data.list %}
+              {% else %} {% for resolution in list %}
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-red-100 hover:cursor-pointer">
                 <td class="px-6 py-4 flex gap-4 items-stretch">
                   <!-- Image wrapper: height follows the text -->
